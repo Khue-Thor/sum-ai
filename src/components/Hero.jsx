@@ -14,8 +14,13 @@ const Hero = () => {
         </button>
       </nav>
       <h1 className="head_text">
-        Summarize Articles with <br className="max-md:hidden"/> <span className="orange_gradient">OpenAI GPT-4</span>
+        Summarize Articles with <br className="max-md:hidden" />{" "}
+        <span className="orange_gradient">OpenAI GPT-4</span>
       </h1>
+      <h2 className="desc">
+        Streamline your reading experience with Summize, an open-source article summarizer.Say
+        goodbye to information overload and discover the convenience of Summize
+      </h2>
     </header>
   );
 };

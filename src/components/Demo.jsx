@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { copy, linkIcon, loader, tick } from "../assets";
+import { copy, linkIcon, loader, tick, trashcan } from "../assets";
 
 import { useLazyGetSummaryQuery } from "../services/article";
 
@@ -50,6 +50,10 @@ const Demo = () => {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const handleRemoveHistory = (e) => {
+    localStorage.removeItem("articles");
+  };
+
   return (
     <section className="mt-16 w-full max-2-xl">
       <div className="flex flex-col w-full gap-2">
@@ -71,15 +75,18 @@ const Demo = () => {
           {allArticles.map((item, index) => (
             <div key={`link-${index}`} onClick={() => setArticle(item)} className="link_card">
               <div className="copy_btn" onClick={() => handleCopy(item.url)}>
-              <img
+                <img
                   src={copied === item.url ? tick : copy}
                   alt={copied === item.url ? "tick_icon" : "copy_icon"}
-                  className='w-[40%] h-[40%] object-contain'
+                  className="w-[40%] h-[40%] object-contain"
                 />
               </div>
               <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
                 {item.url}
               </p>
+              <div className="bg-black rounded-full p-1 hover:bg-red-400" onClick={handleRemoveHistory}>
+                <img src={trashcan} className="w-[15px] h-[15px] object-contain" />
+              </div>
             </div>
           ))}
         </div>
@@ -100,9 +107,7 @@ const Demo = () => {
                 Article <span className="blue_gradient">Summary</span>
               </h2>
               <div className="summary_box">
-                <p className="font-inter text-medium text-gray-700">
-                  {article.summary}
-                </p>
+                <p className="font-inter text-medium text-gray-700">{article.summary}</p>
               </div>
             </div>
           )
